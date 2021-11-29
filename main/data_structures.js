@@ -7,8 +7,16 @@ export class DynamicArray {
         this.array.push(val)
     }
 
-    Pop() {
+    PopBack() {
         return this.array.pop()
+    }
+
+    PopFront() {
+        return this.array.shift()
+    }
+
+    Size() {
+        return this.array.length
     }
 }
 
@@ -72,19 +80,34 @@ export class LinkedList {
     }
 }
 
-export class Stack{
+export class Stack extends DynamicArray {
     constructor () {
-        this.stack = []
+        super();
     }
 
 
     Push(val) {
-        this.stack.push(val)
+        this.Append(val)
     }
     
     Pop(){
-        return this.stack.pop()
+        const X = this.PopBack()
+        return X
     }
-        
+}
+
+export class Queue extends DynamicArray {
+    constructor() {
+        super();
+    }
+
+    Enqueue(val) {
+        this.Append(val)
+    }
+
+    Dequeue() {
+        const X = this.PopFront()
+        return X
+    }
 
 }

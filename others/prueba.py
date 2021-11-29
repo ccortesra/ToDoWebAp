@@ -21,6 +21,10 @@ def main():
 
         if d == '1': # Responder
             siguientes.Pop()
+            if siguientes.stack == []:
+                siguientes.stack = pasados.stack.copy()
+                pasados.stack = [] 
+
         elif d == '2': # Siguiente
             if len(siguientes.stack) > 1:
                 X = siguientes.Pop()

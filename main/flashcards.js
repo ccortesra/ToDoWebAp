@@ -1,4 +1,4 @@
-import {DynamicArray, ListNode, LinkedList} from "./data_structures.js";
+import {DynamicArray, ListNode, LinkedList, Stack} from "./data_structures.js";
 
 var decks = new DynamicArray()// Here we will store the decks (not the cards) a set of
 // cards is a deck
@@ -12,7 +12,7 @@ class Deck {
     }
 }
 
-function CreateDesk () {
+function CreateDeck () {
     const name = prompt(`Introduce el nombre del mazo de preguntas`)
     let new_deck = new Deck(name)
     decks.Append(new_deck)
@@ -86,7 +86,7 @@ function main() {
         3) Salir`)
         
         if (first_action == '1'){
-            CreateDesk()
+            CreateDeck()
         } else if (first_action == '2') {
             DisplayDecks()
             const choose_deck = prompt(`Escribe el número de mazo`)

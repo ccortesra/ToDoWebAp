@@ -1,0 +1,39 @@
+
+FlashCards: ------------------------------------------------------------------------------------
+
+Clase Deck
+
+Atributos:
+
+- name: es un string de caracteres con el nombre que el usuario le da al mazo
+- cards: es un Array Dinamico de objetos Card
+
+Clase Card
+
+Atributos:
+
+- question: Es un string de caracteres de la pregunta ingresada por el usuario
+- answer: Es otro string de caracteres que respalda su respectiva pregunta
+
+Funcionamiento de Stacks en La Funcionalidad de Responder Mazos:
+
+Cada mazo tiene la opción de ser contestado, para ello se presentara primero la primera pregunta,
+el usuario, en cada pregunta puede:
+
+1) Mostrar Respuesta
+2) Ir a la siguiente pregunta
+3) Ir a la pregunta pasada
+
+Esto funciona por medio de stacks:
+
+Primero se crean dos stacks, y se ingresan todas las preguntas al llamado preguntas siguientes,
+de modo que el top del stack sea la pregunta actual.
+
+Si el usuario presiona 1): Simplemente sacamos la pregunta actual y desaparece, ahora la pregunta
+actual sera la siguiente en el stack
+
+Si el usuario presiona 2): Pasaremos la pregunta actual a el stack de preguntas pasadas
+
+Si el usuario presiona 3) Psaremos la pregunta en el top de pasadas a el stack de siguientes y 
+sera la actual
+----------------------------------------------------------------------------------------------
