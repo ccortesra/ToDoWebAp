@@ -102,7 +102,7 @@ export class Queue extends DynamicArray {
     }
 
     TopFront() {
-        if (this.array.length > 1) {
+        if (this.array.length > 0) {
             return this.array[0]
         } else {
             return false
