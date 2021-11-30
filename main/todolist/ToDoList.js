@@ -68,9 +68,8 @@ function main() {
         const first_action = prompt(`Escribe el número de la acción que deseas realizar
         1) Añadir una tarea 
         2) Ver mis tareas
-        3) Eliminar una tarea
-        4) Finalizar tarea
-        5) Salir`)
+        3) Quitar tarea
+        4) Salir`)
 
         if (first_action == "1") {
             MyList.AddTask();
@@ -78,7 +77,7 @@ function main() {
             MyList.Display();
         }else if (first_action == "3") {
             MyList.Delete()
-        } else if(first_action == "5"){
+        } else if(first_action == "4"){
             return
         }
     }

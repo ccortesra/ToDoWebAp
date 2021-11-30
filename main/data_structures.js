@@ -101,6 +101,14 @@ export class Queue extends DynamicArray {
         super();
     }
 
+    TopFront() {
+        if (this.array.length > 1) {
+            return this.array[0]
+        } else {
+            return false
+        }       
+    }
+
     Enqueue(val) {
         this.Append(val)
     }

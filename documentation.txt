@@ -34,6 +34,13 @@ actual sera la siguiente en el stack
 
 Si el usuario presiona 2): Pasaremos la pregunta actual a el stack de preguntas pasadas
 
-Si el usuario presiona 3) Psaremos la pregunta en el top de pasadas a el stack de siguientes y 
+Si el usuario presiona 3) Pasaremos la pregunta en el top de pasadas a el stack de siguientes y 
 sera la actual
+
+Que es un pensum? 
+
+Un pensum o plan de estudios es una lista de mazos para estudiar, se van
+añadiendi y solo hasta que respondas los mazon mas recientes se desbloquearan
+los demas mazos. Funcionara por medio de una Queue 
+
 ----------------------------------------------------------------------------------------------

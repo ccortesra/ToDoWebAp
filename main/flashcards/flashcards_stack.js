@@ -1,7 +1,17 @@
-import {DynamicArray, ListNode, LinkedList, Stack} from "../data_structures.js";
+import {DynamicArray, ListNode, LinkedList, Stack, Queue} from "../data_structures.js";
 
+var pensums = new DynamicArray()// Global vars that contains the pensums
+// created 
 var decks = new DynamicArray()// Here we will store the decks (not the cards) a set of
 // cards is a deck
+
+class Pensum {
+    constructor(name,decks=null,deckscount=null){
+        this.name = name
+        this.decks = new Queue()
+        this.deckscount = 0
+    }
+}
 
 class Deck {
     constructor(name,cards=null){
@@ -32,6 +42,7 @@ function DisplayDecks() {
         displayDecks += `${i+1} - ${deck.name}\n`
     }
     alert(displayDecks)
+    return displayDecks
 }
 
 function AddQuestions(deck) {
@@ -92,6 +103,68 @@ function AnswerDeck(deck) {
     }
 }
 
+function CreatePensum() {
+    const name = prompt(`Introduce el nombre del pensum`)
+    let new_pensum = new Pensum(name)
+    pensums.Append(new_pensum)
+}
+
+function DisplayPensums() {
+    let PensumsLength = pensums.array.length
+    let displayPensums = 'Pensums disponibles:\n'
+    for (let i = 0; i< PensumsLength; i++) {
+        let pensum = pensums.array[i]
+        displayPensums += `${i+1} - ${pensum.name}\n`
+    }
+    alert(displayPensums)
+    return displayPensums
+}
+
+
+function AddDeck(pensum) {
+    while (true) {
+        const decks_available = DisplayDecks()
+        const question = prompt(`Introduce el número de mazo a agregar
+        ${decks_available}`)
+        
+        let new_deck = decks.array[parseInt(question)-1]
+        pensum.decks.Enqueue(new_deck)
+
+        const wantMore = prompt(`Escribe el número de la acción que deseas realizar
+        1) Añade más mazos
+        2) Salir`)
+
+        if (wantMore == 2) {
+            return
+        }
+    }
+}
+
+function AnswerPensum(pensum) {
+    while (true) {
+        const next_deck = pensum.decks.TopFront()
+        if (next_deck != false) {
+            const action = prompt(`Escribe el número de acción que deseas realizar
+            1) Resolver el siguiente mazo: ${next_deck}
+            2) Salir`)
+            
+            if (action == 1) {
+                AnswerDeck(next_deck)
+                pensum.Dequeue()
+            } else {
+                return
+            }
+        } else {
+            alert(`Felicidades ! Has resuelto todos tus mazos`)
+            return
+        }
+
+        
+    }
+    
+    
+
+}
 
 function main() {
     while (true){
@@ -100,7 +173,9 @@ function main() {
         const first_action = prompt(`Escribe el número de la acción que deseas realizar
         1) Añade un mazo de preguntas
         2) Seleccionar mazo de preguntas
-        3) Salir`)
+        3) Crear Pensum
+        4) Seleccionar Pensum
+        5) Salir`)
         
         if (first_action == '1'){
             CreateDeck()
@@ -118,6 +193,20 @@ function main() {
                 AnswerDeck(deck_chosen)
             }
 
+        } else if(first_action == '3') {
+            CreatePensum()
+        } else if(first_action == '4') {
+            DisplayPensums()
+            const choose_pensum = prompt(`Escribe el número de pensum`)
+            const second_action = prompt(`Escribe el número de la acción que deseas realizar
+            1) Añadir mazos al pensum
+            2) Resolver pensum`)
+            const pensum_chosen = pensums.array[parseInt(choose_pensum)-1]
+            if (second_action == 1){
+                AddDeck(pensum_chosen)
+            } else if(second_action == 2) {
+                AnswerPensum(pensum_chosen)
+            }
         } else {
             break;
         }
