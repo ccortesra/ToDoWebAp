@@ -45,6 +45,8 @@ function DisplayDecks() {
     return displayDecks
 }
 
+// Checked 
+
 function AddQuestions(deck) {
     while (true) {
         const question = prompt(`Introduce la pregunta que quieres incorporar`)
@@ -66,11 +68,15 @@ function AddQuestions(deck) {
 
 function AnswerDeck(deck) {
     let preguntas_siguientes = new Stack()
-    preguntas_siguientes.array = deck.cards.array.slice().reverse()
+
+    // Fullfulling preguntas_siguientes stack
+    for (let i = deck.cards.array.length - 1; i >= 0; i--) {
+        preguntas_siguientes.PushBack(deck.cards.array[i])
+    }
     
     let preguntas_pasadas = new Stack()
 
-    let current = preguntas_siguientes.array[preguntas_siguientes.array.length - 1]
+    let current = preguntas_siguientes.tail.key
     while (current != undefined) {
         const action = prompt(`${current.question}
         Escribe el número de la acción que deseas realizar
@@ -81,25 +87,43 @@ function AnswerDeck(deck) {
         if (action == 1) { // Mostrar respuesta
             let X = preguntas_siguientes.Pop()
             alert(`La repuesta es:
-            ${X.answer}`)
-            if (preguntas_siguientes.array == []){
-                preguntas_siguientes.array = preguntas_pasadas.array.slice()
-                preguntas_pasadas.array = []
+            ${X.key.answer}`)
+
+            // Si el stack de preguntas siguientes está vacio
+            if (preguntas_siguientes.head == null){
+                
+                // Pasando todas las preguntas de pasadas a siguientes
+                let p = preguntas_pasadas.tail
+                while (p) {
+                    p = preguntas_pasadas.Pop()
+                    if (p!= undefined && p!= false){
+                        preguntas_siguientes.Push(p.key)
+                    }
+                }
+
+                preguntas_pasadas.head = null
+                preguntas_pasadas.tail = null
             }
         } else if(action == 2) { // Siguiente pregunta
-            if (preguntas_siguientes.array.length > 1) {
+            if (preguntas_siguientes.Size() > 1) {
                 let X = preguntas_siguientes.Pop()
-                preguntas_pasadas.Push(X)
+                preguntas_pasadas.Push(X.key)
             }
         } else if(action == 3){ // Pregunta pasada
-            if (preguntas_pasadas.array.length > 0) {
+            if (preguntas_pasadas.Size() > 0) {
                 let X = preguntas_pasadas.Pop()
-                preguntas_siguientes.Push(X)
+                preguntas_siguientes.Push(X.key)
             }
         } else {
             return
         }
-        current = preguntas_siguientes.array[preguntas_siguientes.array.length - 1]
+
+        try {
+            current = preguntas_siguientes.tail.key
+        } catch(error) {
+            current = undefined
+        }
+        
     }
 }
 
@@ -120,6 +144,7 @@ function DisplayPensums() {
     return displayPensums
 }
 
+// Checked
 
 function AddDeck(pensum) {
     while (true) {
@@ -150,7 +175,7 @@ function AnswerPensum(pensum) {
             
             if (action == 1) {
                 AnswerDeck(next_deck)
-                pensum.Dequeue()
+                pensum.decks.Dequeue()
             } else {
                 return
             }

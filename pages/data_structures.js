@@ -50,16 +50,20 @@ export class LinkedList {
     }
 
     PopBack() {
-        if (head == null) {
+        if (this.head == null) {
             console.error('This Linked List is empty')
         }
 
-        if (head == null) {
+        if (this.head == this.tail) {
+            const X = this.head
             this.head = null
             this.tail = null
+            return X
         } else {
+            const X = this.tail
             this.tail = this.tail.prev
             this.tail.next = null
+            return X
         }
 
 
@@ -67,6 +71,24 @@ export class LinkedList {
 
     getFirst() {
         return this.head;
+    }
+
+    PopBack() {
+        if (this.head == null) {
+            return false
+        } 
+        if (this.head == this.tail) {
+            const X = this.head
+            this.head = null
+            this.tail = null
+            return X
+        } else {
+            const X = this.tail
+            this.tail = this.tail.prev
+            this.tail.next = null
+            return X
+
+        }
     }
 
     Size() {
@@ -80,14 +102,18 @@ export class LinkedList {
     }
 }
 
-export class Stack extends DynamicArray {
+// Stack class extends Linked List:
+
+// Push() -- > super.PushBack()
+// Pop()  --> super.PopBack()
+export class Stack extends LinkedList {
     constructor () {
         super();
     }
 
 
     Push(val) {
-        this.Append(val)
+        this.PushBack(val)
     }
     
     Pop(){
@@ -96,21 +122,21 @@ export class Stack extends DynamicArray {
     }
 }
 
-export class Queue extends DynamicArray {
+export class Queue extends LinkedList {
     constructor() {
         super();
     }
 
     TopFront() {
-        if (this.array.length > 0) {
-            return this.array[0]
+        if (this.head != null) {
+            return this.head
         } else {
             return false
         }       
     }
 
     Enqueue(val) {
-        this.Append(val)
+        this.PushBack(val)
     }
 
     Dequeue() {
