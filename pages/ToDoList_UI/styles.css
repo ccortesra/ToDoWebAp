@@ -6,7 +6,7 @@
 
 html {
     font-size: 62.5%;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Work Sans', sans-serif;
 }
 
 body {
@@ -36,6 +36,34 @@ header {
     height: 50px;
 }
 
+main {
+    position: fixed;
+    top: 100px;
+}
+
+.task-name__input {
+    position: fixed;
+    width: 268px;
+    height: 33px;
+    left: 26px;
+    top: 188px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 15px;
+}
+
+::placeholder {
+    position: absolute;
+    left: 16px;
+    top: 9px;
+    font-family: 'Work Sans';
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+}
+
 .tab-bar {
     height: 100px;
     box-shadow: rgb(0 0 0 / 35%) 0px 3px 8px;
@@ -45,4 +73,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+.tab-bar a {
+    text-decoration: none;
 }
